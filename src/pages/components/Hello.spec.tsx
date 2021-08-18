@@ -1,6 +1,8 @@
-import { render } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import Hello from './Hello'
 
-test('Hello world rendering', () => {
+fit('Hello world rendering', () => {
 	render(<Hello />)
+	const myElement = screen.getByText(/Hello/)
+	expect(myElement).toBeInTheDocument()
 })
