@@ -1,6 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import Counter from "./Counter";
-import { fireEvent, waitFor } from "@testing-library/dom";
+import {
+  fireEvent,
+  waitFor,
+  waitForElementToBeRemoved,
+} from "@testing-library/dom";
 import user from "@testing-library/user-event";
 
 describe("Counter", () => {
@@ -23,6 +27,10 @@ describe("Counter", () => {
         await waitFor(() => {
           expect(screen.getByText("Current counter: 15")).toBeInTheDocument();
         });
+      });
+      // eslint-disable-next-line jest/expect-expect
+      it("removes small warning after 15", async () => {
+        await waitForElementToBeRemoved(() => screen.queryByText("im small"));
       });
     });
     describe("when the incrementor changes to 25 and - is clicked", () => {
